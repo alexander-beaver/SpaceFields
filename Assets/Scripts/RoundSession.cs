@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class RoundSession
 {
-    public string equation = "x*y";
+    public string equation = "x";
     public int lowerXBound = -10;
     public int upperXBound = 10;
     public int lowerYBound = -5;
@@ -75,15 +75,30 @@ public class RoundSession
     // Utils
     public float EvaluateSlopeAtPoint(float x, float y)
     {
+        this.context = new ExpressionContext();
+        if (this.equation.IndexOf("x") > -1)
+        {
+            this.context.Variables["x"] = x;
+            Debug.Log("Found X");
 
-        context.Variables["x"] = x;
-        context.Variables["y"] = y;
+        }
+        else
+        {
+            Debug.Log("No X");
+        }
+        if(this.equation.IndexOf("y") > -1)
+        {
+            this.context.Variables["y"] = y;
+            Debug.Log("Found Y");
+
+        }
 
 
 
         IDynamicExpression eGeneric = context.CompileDynamic(this.equation);
 
-        float result = (float)eGeneric.Evaluate();
+        double dresult = (double)eGeneric.Evaluate();
+        float result = Convert.ToSingle(dresult);
 
         if (float.IsNaN(result))
         {
