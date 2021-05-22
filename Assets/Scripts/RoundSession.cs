@@ -79,26 +79,19 @@ public class RoundSession
         if (this.equation.IndexOf("x") > -1)
         {
             this.context.Variables["x"] = x;
-            Debug.Log("Found X");
 
         }
-        else
-        {
-            Debug.Log("No X");
-        }
+        
         if(this.equation.IndexOf("y") > -1)
         {
             this.context.Variables["y"] = y;
-            Debug.Log("Found Y");
-
         }
 
 
 
         IDynamicExpression eGeneric = context.CompileDynamic(this.equation);
 
-        double dresult = (double)eGeneric.Evaluate();
-        float result = Convert.ToSingle(dresult);
+        float result = (float)eGeneric.Evaluate();
 
         if (float.IsNaN(result))
         {

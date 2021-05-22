@@ -8,7 +8,7 @@ using UnityEngine.UI;
  */
 public class SuperGame : MonoBehaviour
 {
-    public static string equation = "x^y";
+    public static string equation = "2*y/x";
     public RoundSession gameRound;
     public SlopeFieldLineRenderer lr;
 
