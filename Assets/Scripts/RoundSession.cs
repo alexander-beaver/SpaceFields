@@ -14,6 +14,7 @@ public class RoundSession
     public float dx = 1;
     public float dy = 1;
 
+    public float startY = 0;
     public float endY = 0;
     public float[,] slopes;
 
@@ -50,6 +51,8 @@ public class RoundSession
 
     }
 
+
+
     public void GenerateSlopeArray()
     {
         for (float i = this.lowerXBound; i <= this.upperXBound; i = i + dx)
@@ -73,15 +76,25 @@ public class RoundSession
     {
         context.Variables["x"] = x;
         context.Variables["y"] = y;
+        context.Variables["e"] = 2.71828f;
+
+
 
         IGenericExpression<float> eGeneric = context.CompileGeneric<float>(this.equation);
 
         float result = eGeneric.Evaluate();
 
+        if (float.IsNaN(result))
+        {
+            return 0;
+        }
+
       
         return result;
 
     }
+
+
 
     public void DrawOriginLines()
     {

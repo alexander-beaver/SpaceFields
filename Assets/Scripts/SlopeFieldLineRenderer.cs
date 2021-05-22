@@ -38,12 +38,12 @@ public class SlopeFieldLineRenderer : MonoBehaviour
         this.RawDrawLine(this.ConvertPlaneXToCanvasCoordinate(0), this.ConvertPlaneYToCanvasCoordinate(this.sg.gameRound.lowerYBound), this.ConvertPlaneXToCanvasCoordinate(0), this.ConvertPlaneYToCanvasCoordinate(this.sg.gameRound.upperYBound), originColor);
         this.RawDrawLine(this.ConvertPlaneXToCanvasCoordinate(this.sg.gameRound.lowerXBound), this.ConvertPlaneYToCanvasCoordinate(0), this.ConvertPlaneXToCanvasCoordinate(this.sg.gameRound.upperXBound), this.ConvertPlaneYToCanvasCoordinate(0), originColor);
 
-        for (float i = this.sg.gameRound.lowerXBound; i <= this.sg.gameRound.upperXBound; i = i + this.sg.gameRound.dx)
+        for (float i = this.sg.gameRound.lowerXBound; i <= this.sg.gameRound.upperXBound; i = i + 1)
         {
-            for (float j = this.sg.gameRound.lowerYBound; j <= this.sg.gameRound.upperYBound; j = j + this.sg.gameRound.dy)
+            for (float j = this.sg.gameRound.lowerYBound; j <= this.sg.gameRound.upperYBound; j = j + 1)
             {
                 
-                this.DrawLine(i, j, this.sg.gameRound.slopes[Mathf.RoundToInt((j - this.sg.gameRound.lowerYBound) / this.sg.gameRound.dy), Mathf.RoundToInt((i - this.sg.gameRound.lowerXBound) / this.sg.gameRound.dx)]);
+                this.DrawLine(i, j, this.sg.gameRound.slopes[Mathf.RoundToInt((j - this.sg.gameRound.lowerYBound) / 1), Mathf.RoundToInt((i - this.sg.gameRound.lowerXBound) / 1)]);
             }
         }
     }
@@ -80,11 +80,12 @@ public class SlopeFieldLineRenderer : MonoBehaviour
     }
     void DrawLine(float x, float y, float slope)
     {
-       
 
 
 
-        float delta = this.sg.gameRound.dx / 3;
+
+        //float delta = this.sg.gameRound.dx / 3;
+        float delta = 1 / 3;
         float linlen = 0.25f;
         float theta = Mathf.Atan(slope);
 
