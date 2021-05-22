@@ -38,9 +38,9 @@ public class SlopeFieldLineRenderer : MonoBehaviour
         this.RawDrawLine(this.ConvertPlaneXToCanvasCoordinate(0), this.ConvertPlaneYToCanvasCoordinate(this.sg.gameRound.lowerYBound), this.ConvertPlaneXToCanvasCoordinate(0), this.ConvertPlaneYToCanvasCoordinate(this.sg.gameRound.upperYBound), originColor);
         this.RawDrawLine(this.ConvertPlaneXToCanvasCoordinate(this.sg.gameRound.lowerXBound), this.ConvertPlaneYToCanvasCoordinate(0), this.ConvertPlaneXToCanvasCoordinate(this.sg.gameRound.upperXBound), this.ConvertPlaneYToCanvasCoordinate(0), originColor);
 
-        for (float i = this.sg.gameRound.lowerXBound; i <= this.sg.gameRound.upperXBound; i = i + 1)
+        for (float i = this.sg.gameRound.lowerXBound; i <= this.sg.gameRound.upperXBound; i = i + 1f)
         {
-            for (float j = this.sg.gameRound.lowerYBound; j <= this.sg.gameRound.upperYBound; j = j + 1)
+            for (float j = this.sg.gameRound.lowerYBound; j <= this.sg.gameRound.upperYBound; j = j + 1f)
             {
                 
                 this.DrawLine(i, j, this.sg.gameRound.slopes[Mathf.RoundToInt((j - this.sg.gameRound.lowerYBound) / 1), Mathf.RoundToInt((i - this.sg.gameRound.lowerXBound) / 1)]);

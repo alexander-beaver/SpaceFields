@@ -38,6 +38,7 @@ public class RoundSession
         this.context = new ExpressionContext();
 
         this.context.Imports.AddType(typeof(Math));
+        
 
 
         this.InitializeRound();
@@ -74,15 +75,15 @@ public class RoundSession
     // Utils
     public float EvaluateSlopeAtPoint(float x, float y)
     {
+
         context.Variables["x"] = x;
         context.Variables["y"] = y;
-        context.Variables["e"] = 2.71828f;
 
 
 
-        IGenericExpression<float> eGeneric = context.CompileGeneric<float>(this.equation);
+        IDynamicExpression eGeneric = context.CompileDynamic(this.equation);
 
-        float result = eGeneric.Evaluate();
+        float result = (float)eGeneric.Evaluate();
 
         if (float.IsNaN(result))
         {
