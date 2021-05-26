@@ -341,6 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sg: {fileID: 914258308}
   drawingPrefab: {fileID: 2051016491}
+  lineMaterial: {fileID: 2100000, guid: ed2955e1eef737944981736618becabd, type: 2}
 --- !u!4 &346152469
 Transform:
   m_ObjectHideFlags: 0
@@ -349,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346152467}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -589,7 +590,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 0810953a6edda7745a30d32ebb466183, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -640,8 +641,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lr: {fileID: 346152468}
+  toMenu: {fileID: 1057787741}
   equationLabel: {fileID: 527551467}
   endLabel: {fileID: 1600227689}
+  startLabel: {fileID: 1709300759}
   planet: {fileID: 2007344851}
 --- !u!4 &914258309
 Transform:
@@ -794,7 +797,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 0810953a6edda7745a30d32ebb466183, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -1005,7 +1008,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
 --- !u!114 &1054093888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1039,7 +1042,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1293,6 +1296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sg: {fileID: 914258308}
   input: {fileID: 971842632}
+  launchButton: {fileID: 123960519}
 --- !u!1 &1600227687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1355,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 0810953a6edda7745a30d32ebb466183, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
@@ -1637,7 +1641,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051016491}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.659484, y: 3.3557494, z: -3.4383526}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1662,7 +1666,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: ed2955e1eef737944981736618becabd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

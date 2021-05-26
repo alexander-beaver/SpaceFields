@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InGamePlayer : MonoBehaviour
@@ -9,7 +11,14 @@ public class InGamePlayer : MonoBehaviour
 
     public SuperGame sg;
     public InputField input;
+    private bool runTrajectory;
 
+    public Button launchButton;
+
+
+    private float x;    
+    private float y;
+    private float sy;
 
     float ConvertPlaneXToCanvasCoordinate(float x)
     {
@@ -22,7 +31,10 @@ public class InGamePlayer : MonoBehaviour
 
     }
 
-
+    public void RunTrajectory()
+    {
+        this.runTrajectory = true;
+    }
     public void UpdateLocation(string arg0)
     {
 
@@ -34,11 +46,11 @@ public class InGamePlayer : MonoBehaviour
 
         if (notErr)
         {
-            Debug.Log(location.ToString());
-            float x = ConvertPlaneXToCanvasCoordinate(this.sg.gameRound.lowerXBound);
-            float y = ConvertPlaneYToCanvasCoordinate(location);
+            x = this.sg.gameRound.lowerXBound;
+            y = location;
+            sy = location;
 
-            gameObject.transform.SetPositionAndRotation(new Vector3(x, y, 0), new Quaternion());
+            gameObject.transform.SetPositionAndRotation(new Vector3(ConvertPlaneXToCanvasCoordinate(x), ConvertPlaneYToCanvasCoordinate(y), 0), new Quaternion());
         }
     }
     void Start()
@@ -47,11 +59,60 @@ public class InGamePlayer : MonoBehaviour
 
         se.AddListener(UpdateLocation);
         this.input.onValueChanged = se;
+
+        this.launchButton.onClick.AddListener(RunTrajectory);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (this.runTrajectory)
+        {
+            ProcessMovement();
+        }   
+    }
+
+    public void ProcessMovement()
+    {
+        if (x >= this.sg.gameRound.upperXBound)
+        {
+            if ((Mathf.Abs(y-this.sg.gameRound.endY )< .1f) || (Mathf.Abs(sy-this.sg.gameRound.startY)<.1f))
+            {
+                //Success
+                Debug.Log("Success");
+                SceneManager.LoadScene("Congratulations");
+            }
+            else
+            {
+                Debug.Log("Failure");
+            }
+
+            this.runTrajectory = false;
+        }
+        else
+        {
+            try
+            {
+                float slope = this.sg.gameRound.EvaluateSlopeAtPoint(x, y);
+
+
+                float thisdx = 0.05f;
+
+                x = x + thisdx;
+                y = y + (slope * thisdx);
+
+                gameObject.transform.SetPositionAndRotation(new Vector3(ConvertPlaneXToCanvasCoordinate(x), ConvertPlaneYToCanvasCoordinate(y), 0), new Quaternion());
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("Error running");
+                this.runTrajectory = false;
+            }
+           
+
+        }
+
+
+
     }
 }

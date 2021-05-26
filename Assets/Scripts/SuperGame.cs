@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /**
@@ -8,25 +9,51 @@ using UnityEngine.UI;
  */
 public class SuperGame : MonoBehaviour
 {
-    public static string equation = "2*y/x";
+
+    public static string[] equations =
+    {
+        "x/(2*y)",
+        "x/3",
+        "y/2"
+    };
+    public static string equation = "y/2";
     public RoundSession gameRound;
     public SlopeFieldLineRenderer lr;
+
+    public Button toMenu;
 
     public Text equationLabel;
     public Text endLabel;
 
+    public Text startLabel;
+
     public GameObject planet;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        gameRound = new RoundSession(equation, -5, 5, -5, 5, 1);
+        int eqID = Random.Range(0, equations.Length);
+        equation = equations[eqID];
+        toMenu.onClick.AddListener(ToHome);
+        int leftx = Random.Range(-10, 5);
+
+        int rightx = leftx + 5;
+
+        int bottomy = Random.Range(-15, -5);
+        int topy = -bottomy;
+        gameRound = new RoundSession(equation, leftx, rightx, bottomy, topy, 1);
         this.Calculate();
         this.lr.GenerateSlopes();
 
 
     }
 
+    void ToHome()
+    {
+        SceneManager.LoadScene("Launch");
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -53,6 +80,7 @@ public class SuperGame : MonoBehaviour
 
             float currY = start;
 
+            Debug.Log("Start");
             Debug.Log(start);
             for (float x = this.gameRound.lowerXBound; x <= this.gameRound.upperXBound; x = x + this.gameRound.dx)
             {
@@ -68,6 +96,7 @@ public class SuperGame : MonoBehaviour
 
                 equationLabel.text = "dy/dx = " + this.gameRound.equation;
                 endLabel.text = "f(" + this.gameRound.upperXBound + ") = " + this.gameRound.endY;
+                startLabel.text = "f(" + this.gameRound.lowerXBound + ") = ?";
 
                 float px = ConvertPlaneXToCanvasCoordinate(this.gameRound.upperXBound);
                 float py = ConvertPlaneYToCanvasCoordinate(currY);
@@ -85,4 +114,6 @@ public class SuperGame : MonoBehaviour
        
 
     }
+
+   
 }

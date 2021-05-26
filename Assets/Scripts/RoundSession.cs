@@ -81,12 +81,13 @@ public class RoundSession
             this.context.Variables["x"] = x;
 
         }
+     
         
         if(this.equation.IndexOf("y") > -1)
         {
             this.context.Variables["y"] = y;
         }
-
+       
 
 
         IDynamicExpression eGeneric = context.CompileDynamic(this.equation);
@@ -95,8 +96,12 @@ public class RoundSession
 
         if (float.IsNaN(result))
         {
+            Debug.LogWarning("Found NAN Slope");
             return 0;
         }
+
+
+        
 
       
         return result;
