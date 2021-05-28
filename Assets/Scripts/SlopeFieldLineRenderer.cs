@@ -14,6 +14,7 @@ public class SlopeFieldLineRenderer : MonoBehaviour
     public GameObject drawingPrefab;
 
     public Material lineMaterial;
+    public Texture lineTexture;
 
 
 
@@ -30,6 +31,11 @@ public class SlopeFieldLineRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (run)
+        {
+            GenerateSlopes();
+            run = false;
+        }
         
     }
 
@@ -80,8 +86,13 @@ public class SlopeFieldLineRenderer : MonoBehaviour
         GameObject drawing = Instantiate(drawingPrefab);
 
         this.l = drawing.GetComponent<LineRenderer>();
-        this.l.material = new Material(Shader.Find("Sprites/Default")); ;
+        // this.l.material = lineMaterial;
+        this.l.material = new Material(Shader.Find("Mobile/Particles/Additive"));
+
         this.l.material.color = color;
+        this.l.material.SetTexture("_MainTex", lineTexture);
+        this.l.positionCount = 2;
+        this.l.enabled = true;
 
 
         List<Vector3> pos = new List<Vector3>();
@@ -91,7 +102,10 @@ public class SlopeFieldLineRenderer : MonoBehaviour
         this.l.startWidth = 1f;
         this.l.endWidth = 1f;
      
-        l.SetColors(color, color);
+        l.startColor = color;
+        l.endColor = color;
+
+        
         
         this.l.SetPositions(pos.ToArray());
 

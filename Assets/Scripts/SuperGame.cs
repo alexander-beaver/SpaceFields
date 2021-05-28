@@ -44,7 +44,6 @@ public class SuperGame : MonoBehaviour
         int topy = -bottomy;
         gameRound = new RoundSession(equation, leftx, rightx, bottomy, topy, 1);
         this.Calculate();
-        this.lr.GenerateSlopes();
 
 
     }
